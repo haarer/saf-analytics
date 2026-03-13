@@ -35,7 +35,10 @@ def create_graph(viewpoints_data, stakeholders_data, concerns_data):
                            VP_ID=viewpoint.get("VP_ID", ""),
                            purpose=viewpoint.get("Purpose", ""),
                            domain=viewpoint.get("Domain",""),
-                           color = '#ff2244'
+                           color = '#ff2244',
+                           shape='image',
+                           image='vp.png',
+                           size=32
                            )
 
     # Add stakeholders to the graph
@@ -62,7 +65,10 @@ def create_graph(viewpoints_data, stakeholders_data, concerns_data):
                            type="concern",
                            name=concern_name,
                            label=concern_name,
-                           color = '#F000F0'
+                           color = '#F000F0',
+                            shape='image',
+                            image='conc.png',
+                            size=24
                            )
 
     # Resolve relationships using UIDs
@@ -78,7 +84,7 @@ def create_graph(viewpoints_data, stakeholders_data, concerns_data):
                     graph.add_edge(viewpoint_id,
                                    stakeholder_uid,
                                    relationship="has_stakeholder",
-                                   color='#800080'
+                                   color='#808080'
                                    )
 
             # Connect viewpoint to concerns
