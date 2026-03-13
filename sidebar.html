@@ -1,0 +1,42 @@
+
+    <div id="sidebar" style="position:fixed; right:0; top:0; width:420px; height:100%; 
+        background:#f8f9fa; border-left:1px solid #ddd; padding:15px; font-family:sans-serif; z-index:1000; box-shadow: -2px 0 5px rgba(0,0,0,0.1);">
+        <h3 id="sidebar-title">Properties</h3>
+        <div id="details">Click on an element...</div>
+    </div>
+
+    <script>
+    // Funktion zum Generieren der Tabelle
+    function updateSidebar(data, title) {
+        document.getElementById("sidebar-title").innerText = title;
+        var html = "<table style='width:100%; border-collapse:collapse;'>";
+        for (var key in data) {
+            // Interne Felder ignorieren
+            if (["id", "size", "label", "shape", "title", "x", "y", "from", "to", "arrows", "color", "width"].indexOf(key) === -1) {
+                html += "<tr style='border-bottom:1px solid #eee;'><td style='padding:5px;'><b>" + key + ":</b></td><td>" + data[key] + "</td></tr>";
+            }
+        }
+        html += "</table>";
+        document.getElementById("details").innerHTML = html;
+    }
+
+    // Event: Knoten ausgewählt
+    network.on("selectNode", function (params) {
+        var nodeData = nodes.get(params.nodes[0]);
+        updateSidebar(nodeData, "Node: " + nodeData.label);
+    });
+
+    // Event: Kante ausgewählt
+    network.on("selectEdge", function (params) {
+        // Falls ein Knoten ausgewählt wurde, feuert selectEdge oft mit. 
+        // Wir priorisieren den Knoten, falls vorhanden:
+        if (params.nodes.length > 0) return; 
+        
+        var edgeData = edges.get(params.edges[0]);
+        updateSidebar(edgeData, "Edge: " + (edgeData.label || "Verbindung"));
+    });
+
+    // Event: Auswahl aufgehoben
+    network.on("deselectNode", function () { document.getElementById("details").innerHTML = "Klicken Sie auf ein Element..."; });
+    network.on("deselectEdge", function () { document.getElementById("details").innerHTML = "Klicken Sie auf ein Element..."; });
+    </script>

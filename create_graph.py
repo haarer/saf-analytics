@@ -11,7 +11,7 @@ import json
 from pathlib import Path
 
 import networkx as nx
-
+from pyvis.network import Network
 
 def load_json_file(filepath: Path) -> dict:
     """Load a JSON file and return its contents as a dictionary."""
@@ -27,23 +27,43 @@ def create_graph(viewpoints_data, stakeholders_data, concerns_data):
     # Add viewpoints to the graph
     for viewpoint in viewpoints_data:
         viewpoint_id = viewpoint.get("ID", "")
-        viewpoint_name = viewpoint.get("Name", "")
         if viewpoint_id:
-            graph.add_node(viewpoint_id, type="viewpoint", name=viewpoint_name)
+            graph.add_node(viewpoint_id,
+                           type="viewpoint", 
+                           label=viewpoint.get("Name", ""),
+                           name=viewpoint.get("Name", ""),
+                           VP_ID=viewpoint.get("VP_ID", ""),
+                           purpose=viewpoint.get("Purpose", ""),
+                           domain=viewpoint.get("Domain",""),
+                           color = '#ff2244'
+                           )
 
     # Add stakeholders to the graph
     for stakeholder in stakeholders_data:
         stakeholder_id = stakeholder.get("ID", "")
         stakeholder_name = stakeholder.get("Name", "")
         if stakeholder_id:
-            graph.add_node(stakeholder_id, type="stakeholder", name=stakeholder_name)
+            graph.add_node( stakeholder_id,
+                            type="stakeholder",
+                            name=stakeholder_name,
+                            label=stakeholder_name,
+                            color = '#808080',
+                            shape='image',
+                            image='sth.png',
+                            size=32
+                            )
 
     # Add concerns to the graph
     for concern in concerns_data:
         concern_id = concern.get("ID", "")
         concern_name = concern.get("Name", "")
         if concern_id:
-            graph.add_node(concern_id, type="concern", name=concern_name)
+            graph.add_node(concern_id, 
+                           type="concern",
+                           name=concern_name,
+                           label=concern_name,
+                           color = '#F000F0'
+                           )
 
     # Resolve relationships using UIDs
     for viewpoint in viewpoints_data:
@@ -55,12 +75,20 @@ def create_graph(viewpoints_data, stakeholders_data, concerns_data):
             # Connect viewpoint to stakeholders
             for stakeholder_uid in stakeholders:
                 if stakeholder_uid in graph.nodes:
-                    graph.add_edge(viewpoint_id, stakeholder_uid, relationship="has_stakeholder")
+                    graph.add_edge(viewpoint_id,
+                                   stakeholder_uid,
+                                   relationship="has_stakeholder",
+                                   color='#800080'
+                                   )
 
             # Connect viewpoint to concerns
             for concern_uid in concerns:
                 if concern_uid in graph.nodes:
-                    graph.add_edge(viewpoint_id, concern_uid, relationship="has_concern")
+                    graph.add_edge(viewpoint_id,
+                                   concern_uid,
+                                   relationship="frames_concern",
+                                   color='#808080'
+                                   )
 
     return graph
 
@@ -73,48 +101,29 @@ def save_graph(graph, output_path: Path):
 
 def visualize_with_pyvis(graph, output_dir: Path):
     """Visualize the graph using PyVis and save as an HTML file."""
-    try:
-        from pyvis.network import Network
-        # Create a PyVis network
-        net = Network(notebook=True, directed=True, cdn_resources="in_line")
 
-        # Add nodes with their attributes
-        for node in graph.nodes(data=True):
-            net.add_node(node[0], label=node[1].get("name", ""), title=str(node[1]))
 
-        # Add edges with their relationships
-        for edge in graph.edges(data=True):
-            net.add_edge(edge[0], edge[1], title=edge[2].get("relationship", ""))
+    # Create a PyVis network with physics enabled
+    net = Network(notebook=False, directed=True, cdn_resources="remote", height="900px", width="100%")
+    net.toggle_physics(True)  # Enable physics
 
-        # Save the visualization to an HTML file
-        html_path = output_dir / "graph_visualization.html"
-        net.save_graph(str(html_path))  # Convert Path to string to avoid the error
-    except ImportError:
-        print("PyVis is not installed. Skipping visualization.")
-        return
-
-    # Create a PyVis network
-    net = Network(notebook=False, directed=True, cdn_resources="remote")
-
-    # Add nodes and edges to the network
-    for node in graph.nodes(data=True):
-        node_id, data = node
-        node_type = data.get("type", "unknown")
-        node_name = data.get("name", node_id)
-        color = "#FF6B6B" if node_type == "viewpoint" else ("#4ECDC4" if node_type == "stakeholder" else "#FFE66D")
-        net.add_node(node_id, label=node_name, title=f"Type: {node_type}", color=color)
-
-    for edge in graph.edges(data=True):
-        source, target, data = edge
-        relationship = data.get("relationship", "unknown")
-        net.add_edge(source, target, title=relationship)
+    net.from_nx(graph)
 
     # Ensure the output directory exists
     output_dir.mkdir(parents=True, exist_ok=True)
 
     # Save the visualization to an HTML file
     output_file = output_dir / "graph_visualization.html"
+    #net.show_buttons(filter_=['physics'])
     net.save_graph(str(output_file))
+
+
+    with open("sidebar.html") as f_sidebar:
+        sidebar_html=f_sidebar.read()
+
+    with open(output_file, "a") as f:
+        f.write(sidebar_html)
+
     print(f"Graph visualization saved to {output_file}")
 
 
@@ -138,6 +147,7 @@ def main():
 
     # Visualize the graph using PyVis and save to a subdirectory
     webvis_dir = Path("webvis")
+
     visualize_with_pyvis(graph, webvis_dir)
 
     print(f"Graph created with {graph.number_of_nodes()} nodes and {graph.number_of_edges()} edges.")
