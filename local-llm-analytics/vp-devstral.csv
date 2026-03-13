@@ -1,0 +1,58 @@
+Perspective,Viewpoint,Typical Stakeholders
+Operational / Mission Analysis,Operational Capability Definition,Business Analysts, Mission Planners, Stakeholder Representatives
+Operational / Mission Analysis,Operational Capability Mapping,Business Analysts, Mission Planners, Requirements Engineers
+Operational / Mission Analysis,Operational Context Definition,Business Analysts, Mission Planners, Stakeholder Representatives
+Operational / Mission Analysis,Operational Context Exchange,Business Analysts, Mission Planners, System Engineers
+Operational / Mission Analysis,Operational Context Interaction,Business Analysts, Mission Planners, System Engineers
+Operational / Mission Analysis,Operational Domain Item Kind,Business Analysts, Domain Experts, System Engineers
+Operational / Mission Analysis,Operational Performer Definition,Business Analysts, Mission Planners, Stakeholder Representatives
+Operational / Mission Analysis,Operational Process Mapping,Business Analysts, Mission Planners, Requirements Engineers
+Operational / Mission Analysis,Operational Process,Business Analysts, Mission Planners, System Engineers
+Operational / Mission Analysis,Operational State,Business Analysts, Mission Planners, System Engineers
+Operational / Mission Analysis,Operational Story,Business Analysts, Mission Planners, Stakeholder Representatives
+Operational / Mission Analysis,Stakeholder Identification,Business Analysts, Mission Planners, Stakeholder Representatives
+Operational / Mission Analysis,Stakeholder Requirement Definition,Business Analysts, Requirements Engineers, Stakeholder Representatives
+Conceptual System Development,System Capability Definition,System Architects, Requirements Engineers, Stakeholder Representatives
+Conceptual System Development,System Capability Mapping,System Architects, Requirements Engineers, Business Analysts
+Conceptual System Development,System Context Definition,System Architects, Requirements Engineers, System Engineers
+Conceptual System Development,System Context Exchange,System Architects, Requirements Engineers, System Engineers
+Conceptual System Development,System Context Interaction,System Architects, Requirements Engineers, System Engineers
+Conceptual System Development,System Domain Item Kind,System Architects, Requirements Engineers, Domain Experts
+Conceptual System Development,System Functional Breakdown Structure,System Architects, Requirements Engineers, System Engineers
+Conceptual System Development,System Functional Refinement,System Architects, Requirements Engineers, System Engineers
+Conceptual System Development,System Interface Definition,System Architects, Requirements Engineers, System Engineers
+Conceptual System Development,System Process,System Architects, Requirements Engineers, System Engineers
+Conceptual System Development,System Requirement Definition,System Architects, Requirements Engineers, Stakeholder Representatives
+Conceptual System Development,System Requirement Traceability,System Architects, Requirements Engineers, System Engineers
+Conceptual System Development,System State,System Architects, Requirements Engineers, System Engineers
+Conceptual System Development,System Use Case,System Architects, Requirements Engineers, Stakeholder Representatives
+Solution System Development,Logical Functional Mapping,System Engineers, Software Architects, Hardware Engineers
+Solution System Development,Logical Internal Exchange,System Engineers, Software Architects, Hardware Engineers
+Solution System Development,Logical Internal Interaction,System Engineers, Software Architects, Hardware Engineers
+Solution System Development,Logical Structure Definition,System Engineers, Software Architects, Hardware Engineers
+Solution System Development,Physical Context Definition,System Engineers, Hardware Engineers, Environmental Engineers
+Solution System Development,Physical Context Exchange,System Engineers, Hardware Engineers, Environmental Engineers
+Solution System Development,Physical Exchange Type Definition,System Engineers, Hardware Engineers, Software Engineers
+Solution System Development,Physical Functional Mapping,System Engineers, Hardware Engineers, Software Engineers
+Solution System Development,Physical Interface Definition,System Engineers, Hardware Engineers, Software Engineers
+Solution System Development,Physical Internal Exchange,System Engineers, Hardware Engineers, Software Engineers
+Solution System Development,Physical Logical Item Mapping,System Engineers, Hardware Engineers, Software Engineers
+Solution System Development,Physical Logical Mapping,System Engineers, Hardware Engineers, Software Engineers
+Solution System Development,Physical Structure Definition,System Engineers, Hardware Engineers, Software Engineers
+Additional Perspectives,Common Standards Definition,System Engineers, Standards Experts, Compliance Officers
+Additional Perspectives,Common Terms Definition,System Engineers, Domain Experts, Documentation Teams
+Additional Perspectives,EA Traceability,Enterprise Architects, System Engineers, Configuration Managers
+Additional Perspectives,Grid Definition,System Architects, System Engineers, Documentation Teams
+Additional Perspectives,Argumentation Assurance,System Engineers, Safety Engineers, Compliance Officers
+Additional Perspectives,Asset Identification,Security Engineers, Risk Managers, Compliance Officers
+Additional Perspectives,Security Context,Security Engineers, Risk Managers, Compliance Officers
+Additional Perspectives,Security Risk Analysis,Security Engineers, Risk Managers, Compliance Officers
+Additional Perspectives,Threat Szenario,Security Engineers, Risk Managers, Compliance Officers
+Framework Development,Framework Concept Definition,Framework Developers, System Architects
+Framework Development,Framework Implementation Traceability,Framework Developers, System Engineers
+Framework Development,Framework Stakeholder and Concern Definition,Framework Developers, System Architects
+Framework Development,Framework Stereotype Overview,Framework Developers, System Engineers
+Framework Development,Framework Viewpoint Definition,Framework Developers, System Architects
+Framework Development,Framework Viewpoint Implementation,Framework Developers, System Engineers
+Framework Development,Framework Viewpoint Overview,Framework Developers, System Architects
+
